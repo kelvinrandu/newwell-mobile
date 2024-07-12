@@ -1,6 +1,15 @@
 import React from 'react';
-import { View, ScrollView, StyleSheet, Image } from 'react-native';
+import { View, ScrollView, StyleSheet, Image,Dimensions } from 'react-native';
 import { Text, Card, Button, Icon } from '@rneui/themed';
+import {
+    LineChart,
+    BarChart,
+    PieChart,
+    ProgressChart,
+    ContributionGraph,
+    StackedBarChart
+  } from "react-native-chart-kit";
+
 
 const users = [
     {
@@ -38,7 +47,7 @@ const Stats = () => {
         <>
             <ScrollView>
                 <View style={styles.container}>
-                    <Text style={styles.fonts2} h4>   Stats !</Text>
+                    <Text style={styles.fonts2} h4>   Stats </Text>
                     <Card containerStyle={{ marginTop: 17, padding: 20, borderRadius: 10 }}>
                         <Text style={styles.fonts} h3>Ms Anima,</Text>
                         {/* <Card.Divider /> */}
@@ -62,84 +71,58 @@ const Stats = () => {
                         </View>
 
                     </Card>
+              
                     <Card containerStyle={{ marginTop: 17, padding: 20, borderRadius: 10 }}>
-                        <Text style={styles.fonts2} h5>My Music Ratings</Text>
-                        {/* <Card.Divider /> */}
-
-                        <View style={styles.display2}>
-                            <Text style={styles.fonts3}>No Music found!</Text>
-                            <Text style={styles.fonts}>Best of the best of,
-                                Your music will show here.</Text>
-
-                            <Button buttonStyle={{
-                                backgroundColor: 'rgba(255, 219, 225, 1)',
-                                color: 'rgba(252, 104, 115, 1)',
-
-                                borderColor: 'transparent',
-                                borderWidth: 0,
-                                borderRadius: 4,
-                            }} titleStyle={{ color: 'rgba(252, 104, 115, 1)', fontWeight: '700' }} type='outline' style={styles.button2}>
-                                Start Now
-                            </Button>
-                        </View>
-
-
-
-                    </Card>
-                    <Card containerStyle={{ marginTop: 17, padding: 20, borderRadius: 10 }}>
-                        <Text style={styles.fonts2} h5>Distribute Lyrics</Text>
-                        {/* <Card.Divider /> */}
-                        <Text style={styles.fonts}>Lyrics on MusixMatch and Shazam</Text>
-                        <View style={styles.display3}>
-                            <Button buttonStyle={{
-
-
-                                borderRadius: 20,
-                            }} style={styles.button} type='outline'>
-                                Start Now
-                            </Button>
-                        </View>
-
-
-
-                    </Card>
-                    <Card containerStyle={{ marginTop: 17, padding: 20, borderRadius: 10 }}>
-                        <Text style={styles.fonts2} h5>Music Copyrights</Text>
-                        {/* <Card.Divider /> */}
-                        <Text style={styles.fonts}>Register content ownership
-                            Available in selected regions</Text>
-                        <View style={styles.display3}>
-                            <Button buttonStyle={{
-
-
-                                borderRadius: 20,
-                            }} borderRadius={'20px'} type='outline'> Start Now</Button>
-                        </View>
-
+                    <View>
+  <Text>New Listeners by month</Text>
+  <LineChart
+    data={{
+      labels: ["Jan", "Feb", "Mar", "Apr", "May", "June"],
+      datasets: [
+        {
+          data: [
+            Math.random() * 10,
+            Math.random() * 10,
+            Math.random() * 10,
+            Math.random() * 10,
+            Math.random() * 10,
+            Math.random() * 10,
+          ]
+        }
+      ]
+    }}
+    width={300} // from react-native
+    height={220}
+    yAxisLabel=""
+    yAxisSuffix="k"
+    yAxisInterval={1} // optional, defaults to 1
+    chartConfig={{
+      backgroundColor: "#e26a00",
+      backgroundGradientFrom: "#fb8c00",
+      backgroundGradientTo: "#ffa726",
+      decimalPlaces: 2, // optional, defaults to 2dp
+      color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+      labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+      style: {
+        borderRadius: 16
+      },
+      propsForDots: {
+        r: "6",
+        strokeWidth: "2",
+        stroke: "#ffa726"
+      }
+    }}
+    bezier
+    style={{
+      marginVertical: 8,
+      borderRadius: 16
+    }}
+  />
+</View>
 
 
                     </Card>
 
-                    <Card containerStyle={{ marginBottom: 20, marginTop: 17, padding: 20, borderRadius: 10 }}>
-
-                        <View style={styles.display}>
-                            <Text style={styles.fonts2} h5>Notifications</Text>
-                            <Button title="Clear" type="clear" />
-                        </View>
-
-                        {users.map((u, i) => {
-                            return (
-                                <View key={i} style={styles.user}>
-                                    <Image
-                                        style={styles.image}
-                                        resizeMode="cover"
-                                        source={{ uri: u.avatar }}
-                                    />
-                                    <Text style={styles.name}>{u.name}</Text>
-                                </View>
-                            );
-                        })}
-                    </Card>
                 </View>
             </ScrollView>
         </>

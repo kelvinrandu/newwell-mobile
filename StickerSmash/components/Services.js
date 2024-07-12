@@ -86,60 +86,7 @@ const Services = () => {
 
 
                     </Card>
-                    <Card containerStyle={{ marginTop: 17, padding: 20, borderRadius: 10 }}>
-                        <Text style={styles.fonts2} h5>Distribute Lyrics</Text>
-                        {/* <Card.Divider /> */}
-                        <Text style={styles.fonts}>Lyrics on MusixMatch and Shazam</Text>
-                        <View style={styles.display3}>
-                            <Button buttonStyle={{
-
-
-                                borderRadius: 20,
-                            }} style={styles.button} type='outline'>
-                                Start Now
-                            </Button>
-                        </View>
-
-
-
-                    </Card>
-                    <Card containerStyle={{ marginTop: 17, padding: 20, borderRadius: 10 }}>
-                        <Text style={styles.fonts2} h5>Music Copyrights</Text>
-                        {/* <Card.Divider /> */}
-                        <Text style={styles.fonts}>Register content ownership
-                            Available in selected regions</Text>
-                        <View style={styles.display3}>
-                            <Button buttonStyle={{
-
-
-                                borderRadius: 20,
-                            }} borderRadius={'20px'} type='outline'> Start Now</Button>
-                        </View>
-
-
-
-                    </Card>
-
-                    <Card containerStyle={{ marginBottom: 20, marginTop: 17, padding: 20, borderRadius: 10 }}>
-
-                        <View style={styles.display}>
-                            <Text style={styles.fonts2} h5>Notifications</Text>
-                            <Button title="Clear" type="clear" />
-                        </View>
-
-                        {users.map((u, i) => {
-                            return (
-                                <View key={i} style={styles.user}>
-                                    <Image
-                                        style={styles.image}
-                                        resizeMode="cover"
-                                        source={{ uri: u.avatar }}
-                                    />
-                                    <Text style={styles.name}>{u.name}</Text>
-                                </View>
-                            );
-                        })}
-                    </Card>
+         
                 </View>
             </ScrollView>
         </>

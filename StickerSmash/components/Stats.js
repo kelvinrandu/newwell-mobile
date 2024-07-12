@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, ScrollView, StyleSheet, Image,Dimensions } from 'react-native';
+import { View, ScrollView, StyleSheet, Image, Dimensions } from 'react-native';
 import { Text, Card, Button, Icon } from '@rneui/themed';
 import {
     LineChart,
@@ -8,13 +8,13 @@ import {
     ProgressChart,
     ContributionGraph,
     StackedBarChart
-  } from "react-native-chart-kit";
+} from "react-native-chart-kit";
 
 
 const users = [
     {
         name: 'brynn',
-        avatar: 'https://uifaces.co/our-content/donated/1H_7AxP0.jpg',
+        avatar: 'https://images.pexels.com/photos/598745/pexels-photo-598745.jpeg?crop=faces&fit=crop&h=200&w=200&auto=compress&cs=tinysrgb',
     },
     {
         name: 'thot leader',
@@ -23,7 +23,7 @@ const users = [
     },
     {
         name: 'jsa',
-        avatar: 'https://uifaces.co/our-content/donated/bUkmHPKs.jpg',
+        avatar: 'https://randomuser.me/api/portraits/men/4.jpg',
     },
     {
         name: 'talhaconcepts',
@@ -31,7 +31,7 @@ const users = [
     },
     {
         name: 'andy vitale',
-        avatar: 'https://uifaces.co/our-content/donated/NY9hnAbp.jpg',
+        avatar: 'https://images-na.ssl-images-amazon.com/images/M/MV5BMTgxMTc1MTYzM15BMl5BanBnXkFtZTgwNzI5NjMwOTE@._V1_UY256_CR16,0,172,256_AL_.jpg',
     },
     {
         name: 'katy friedson',
@@ -39,7 +39,18 @@ const users = [
             'https://images-na.ssl-images-amazon.com/images/M/MV5BMTgxMTc1MTYzM15BMl5BanBnXkFtZTgwNzI5NjMwOTE@._V1_UY256_CR16,0,172,256_AL_.jpg',
     },
 ];
-
+const data = {
+    labels: ["Kenya", "Ghana", "USA"], // optional
+    data: [0.4, 0.6, 0.8]
+};
+const data2 = {
+    labels: ["Uwepo", "Tradelic", "Mardi",],
+    datasets: [
+        {
+            data: [20, 45, 28]
+        }
+    ]
+};
 
 
 const Stats = () => {
@@ -47,82 +58,140 @@ const Stats = () => {
         <>
             <ScrollView>
                 <View style={styles.container}>
-                    <Text style={styles.fonts2} h4>   Stats </Text>
+               
                     <Card containerStyle={{ marginTop: 17, padding: 20, borderRadius: 10 }}>
-                        <Text style={styles.fonts} h3>Ms Anima,</Text>
+                    <Text style={{ paddingBottom: 20 }}>Top Songs</Text>
                         {/* <Card.Divider /> */}
-                        <Text style={styles.fonts}>Hope you are good,</Text>
-                        <View style={styles.display}>
-                            <Text style={styles.fonts}>Account : Basic</Text>
-                            <Text style={styles.fonts}>Upgrade</Text>
-                        </View>
-                        <Text style={styles.fonts}>Your music business in one place and under your control.</Text>
-                        <View style={styles.display3}>
-                            <Button buttonStyle={{
-
-
-                                borderRadius: 20,
+                        <BarChart
+                            //   style={graphStyle}
+                            data={data2}
+                            width={300}
+                            height={220}
+                            yAxisLabel=""
+                            chartConfig={{
+                                backgroundColor: "#e26a00",
+                                backgroundGradientFrom: "#99e699",
+                                backgroundGradientTo: "#145214",
+                                decimalPlaces: 1, // optional, defaults to 2dp
+                                color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+                                labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+                                style: {
+                                    borderRadius: 16
+                                },
+                                propsForDots: {
+                                    r: "6",
+                                    strokeWidth: "2",
+                                    stroke: "#ffa726"
+                                }
                             }}
-                                // titleStyle={{ color: 'rgba(252, 104, 115, 1)', fontWeight: '700' }} 
-                                type='outline' style={styles.button2}>
-                                Update your Profile
-                            </Button>
-                            <Text style={styles.fonts}>Upgrade</Text>
+                            verticalLabelRotation={30}
+                        />
+
+                    </Card>
+
+                    <Card containerStyle={{ marginTop: 17, padding: 20, borderRadius: 10 }}>
+                        <View>
+                            <Text style={{ paddingBottom: 20 }} >New Listeners by month</Text>
+                            <LineChart
+                                data={{
+                                    labels: ["Jan", "Feb", "Mar", "Apr", "May", "June"],
+                                    datasets: [
+                                        {
+                                            data: [
+                                                Math.random() * 10,
+                                                Math.random() * 10,
+                                                Math.random() * 10,
+                                                Math.random() * 10,
+                                                Math.random() * 10,
+                                                Math.random() * 10,
+                                            ]
+                                        }
+                                    ]
+                                }}
+                                width={300} // from react-native
+                                height={220}
+                                yAxisLabel=""
+                                yAxisSuffix="k"
+                                yAxisInterval={1} // optional, defaults to 1
+                                chartConfig={{
+                                    backgroundColor: "#e26a00",
+                                    backgroundGradientFrom: "#fb8c00",
+                                    backgroundGradientTo: "#ffa726",
+                                    decimalPlaces: 1, // optional, defaults to 2dp
+                                    color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+                                    labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+                                    style: {
+                                        borderRadius: 16
+                                    },
+                                    propsForDots: {
+                                        r: "6",
+                                        strokeWidth: "2",
+                                        stroke: "#ffa726"
+                                    }
+                                }}
+                                bezier
+                                style={{
+                                    marginVertical: 8,
+                                    borderRadius: 16
+                                }}
+                            />
                         </View>
 
+
                     </Card>
-              
                     <Card containerStyle={{ marginTop: 17, padding: 20, borderRadius: 10 }}>
-                    <View>
-  <Text>New Listeners by month</Text>
-  <LineChart
-    data={{
-      labels: ["Jan", "Feb", "Mar", "Apr", "May", "June"],
-      datasets: [
-        {
-          data: [
-            Math.random() * 10,
-            Math.random() * 10,
-            Math.random() * 10,
-            Math.random() * 10,
-            Math.random() * 10,
-            Math.random() * 10,
-          ]
-        }
-      ]
-    }}
-    width={300} // from react-native
-    height={220}
-    yAxisLabel=""
-    yAxisSuffix="k"
-    yAxisInterval={1} // optional, defaults to 1
-    chartConfig={{
-      backgroundColor: "#e26a00",
-      backgroundGradientFrom: "#fb8c00",
-      backgroundGradientTo: "#ffa726",
-      decimalPlaces: 2, // optional, defaults to 2dp
-      color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-      labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-      style: {
-        borderRadius: 16
-      },
-      propsForDots: {
-        r: "6",
-        strokeWidth: "2",
-        stroke: "#ffa726"
-      }
-    }}
-    bezier
-    style={{
-      marginVertical: 8,
-      borderRadius: 16
-    }}
-  />
-</View>
+                        <View>
+                            <Text style={{ paddingBottom: 20 }}>Streams by Country</Text>
+                            <ProgressChart
+                                data={data}
+                                width={300}
+                                height={220}
+                                strokeWidth={16}
+                                radius={32}
+                                chartConfig={{
+                                    backgroundColor: "#e26a00",
+                                    backgroundGradientFrom: "#b3c6ff",
+                                    backgroundGradientTo: "#4d79ff",
+                                    decimalPlaces: 1, // optional, defaults to 2dp
+                                    color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+                                    labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+                                    style: {
+                                        borderRadius: 16
+                                    },
+                                    propsForDots: {
+                                        r: "6",
+                                        strokeWidth: "2",
+                                        stroke: "#ffa726"
+                                    }
+                                }}
+                                hideLegend={false}
+                            />
+
+                        </View>
 
 
                     </Card>
 
+                    <Card containerStyle={{ marginBottom: 20, marginTop: 17, padding: 20, borderRadius: 10 }}>
+
+                        <View style={styles.display}>
+                            <Text style={styles.fonts2} h5>Most Value Payer</Text>
+                            {/* <Button title="Clear" type="clear" /> */}
+                        </View>
+
+                        {users.map((u, i) => {
+                            return (
+                                <View key={i} style={styles.user}>
+                                    <Image
+                                        style={styles.image}
+                                        resizeMode="cover"
+                                        source={{ uri: u.avatar }}
+                                    />
+                                    <Text style={styles.name}>{u.name}</Text>
+                                </View>
+                            );
+                        })}
+                    </Card>
                 </View>
             </ScrollView>
         </>
@@ -183,6 +252,7 @@ const styles = StyleSheet.create({
     image: {
         width: 30,
         height: 30,
+        borderRadius:20,
         marginRight: 10,
     },
     name: {

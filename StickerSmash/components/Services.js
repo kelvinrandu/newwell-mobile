@@ -38,30 +38,8 @@ const Services = () => {
         <>
             <ScrollView>
                 <View style={styles.container}>
-                    <Text style={styles.fonts2} h4>   services !</Text>
-                    <Card containerStyle={{ marginTop: 17, padding: 20, borderRadius: 10 }}>
-                        <Text style={styles.fonts} h3>Ms Anima,</Text>
-                        {/* <Card.Divider /> */}
-                        <Text style={styles.fonts}>Hope you are good,</Text>
-                        <View style={styles.display}>
-                            <Text style={styles.fonts}>Account : Basic</Text>
-                            <Text style={styles.fonts}>Upgrade</Text>
-                        </View>
-                        <Text style={styles.fonts}>Your music business in one place and under your control.</Text>
-                        <View style={styles.display3}>
-                            <Button buttonStyle={{
-
-
-                                borderRadius: 20,
-                            }}
-                                // titleStyle={{ color: 'rgba(252, 104, 115, 1)', fontWeight: '700' }} 
-                                type='outline' style={styles.button2}>
-                                Update your Profile
-                            </Button>
-                            <Text style={styles.fonts}>Upgrade</Text>
-                        </View>
-
-                    </Card>
+                  
+             
                     <Card containerStyle={{ marginTop: 17, padding: 20, borderRadius: 10 }}>
                         <Text style={styles.fonts2} h5>My Music Ratings</Text>
                         {/* <Card.Divider /> */}

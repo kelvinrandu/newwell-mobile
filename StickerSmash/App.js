@@ -3,7 +3,17 @@ import * as React from 'react';
 import { Button, View } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Home from './components/Home';
+import {Login } from './src/screens/Login'
+import {Otp} from './src/screens/Otp'
+import Dashboard from './src/screens/Dashboard'
+import Marketing from './components/Marketing';
+import MusicLibrary from './components/MusicLibrary';
+import Services from './components/Services';
+import Stats from './components/Stats';
+import CreateRelease from './components/CreateRelease';
+import Notifications from './components/Notifications';
 function HomeScreen({ navigation }) {
   return (
     <View style={{ flex: 1, alignItems: 'flex-start', justifyContent: 'flex-start' }}>
@@ -15,70 +25,37 @@ function HomeScreen({ navigation }) {
   );
 }
 
-function NotificationsScreen({ navigation }) {
+function LoginScreen({ navigation }) {
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button onPress={() => navigation.goBack()} title="NotificationsScreen" />
-    </View>
+    <Login />
   );
 }
-function CreateReleaseScreen({ navigation }) {
+function OtpScreen({ navigation }) {
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button onPress={() => navigation.goBack()} title="CreateReleaseScreen" />
-    </View>
+    <Otp />
   );
 }
-function MusicLibraryScreen({ navigation }) {
+function DashboardScreen({ navigation }) {
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button onPress={() => navigation.goBack()} title="MusicLibraryScreen" />
-    </View>
+    <Dashboard />
   );
 }
-function ServicesScreen({ navigation }) {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button onPress={() => navigation.goBack()} title="ServicesScreen" />
-    </View>
-  );
-}
-function StatsScreen({ navigation }) {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button onPress={() => navigation.goBack()} title="StatsScreen" />
-    </View>
-  );
-}
-function MarketingScreen({ navigation }) {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button onPress={() => navigation.goBack()} title="MarketingScreen" />
-    </View>
-  );
-}
-function SupportScreen({ navigation }) {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button onPress={() => navigation.goBack()} title="Go back home" />
-    </View>
-  );
-}
+
 const Drawer = createDrawerNavigator();
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
     <NavigationContainer>
-      <Drawer.Navigator initialRouteName="Home">
-        <Drawer.Screen name="Home" component={Home} />
-     
-        <Drawer.Screen name=" Create Release" component={CreateReleaseScreen} />
-        <Drawer.Screen name="Music Library" component={MusicLibraryScreen} />
-        <Drawer.Screen name="Services" component={ServicesScreen} />
-        <Drawer.Screen name="Stats" component={StatsScreen} />
-        <Drawer.Screen name="Marketing" component={MarketingScreen} />
-        <Drawer.Screen name="Notifications" component={NotificationsScreen} />
-      </Drawer.Navigator>
+              <Stack.Navigator    initialRouteName="LoginScreen"
+      screenOptions={{
+        headerShown: false,
+      }}>
+          <Stack.Screen name="LoginPage" component={LoginScreen} />
+          <Stack.Screen name="OtpPage" component={OtpScreen} />
+          <Stack.Screen name="Dashboard" component={DashboardScreen} />
+        </Stack.Navigator>
+
     </NavigationContainer>
   );
 }

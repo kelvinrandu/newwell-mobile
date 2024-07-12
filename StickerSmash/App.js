@@ -6,7 +6,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Home from './components/Home';
 import {Login } from './src/screens/Login'
-import {Otp} from './src/screens/Otp'
+import Otp from './src/screens/Otp'
 import Dashboard from './src/screens/Dashboard'
 import Marketing from './components/Marketing';
 import MusicLibrary from './components/MusicLibrary';

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { View, ScrollView, StyleSheet, Image, TextInput, Pressable } from 'react-native';
-import { Text, Button, Card, Icon } from '@rneui/themed';
+import { View, ScrollView, StyleSheet, Image, TextInput,ToastAndroid, Pressable } from 'react-native';
+import { Text,  Card, Icon } from '@rneui/themed';
+import { Button } from 'react-native-paper';
 import * as ImagePicker from 'expo-image-picker';
 import { useTheme } from '@react-navigation/native';
 
@@ -35,43 +36,17 @@ const users = [
 
 
 
-const CreateRelease = () => {
+const Confirm = () => {
     const { colors } = useTheme();
     const [partipantName, setParticipantName] = useState('');
     const [roomName, setRoomName] = useState('');
     const [image, setImage] = useState(null);
-    useEffect(() => {
-        (async () => {
-            if (Platform.OS !== 'web') {
-                const libraryStatus = await ImagePicker.requestMediaLibraryPermissionsAsync();
-                if (libraryStatus.status !== 'granted') {
-                    alert('Sorry, we need camera roll permissions to make this work!');
-                }
 
-                const cameraStatus = await ImagePicker.requestCameraPermissionsAsync();
-                if (cameraStatus.status !== 'granted') {
-                    alert('Sorry, we need camera permissions to make this work!');
-                }
-            }
-        })();
-    }, []);
-    const pickImage = async () => {
-        let result = await ImagePicker.launchImageLibraryAsync({
-            mediaTypes: ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4, 3],
-            quality: 1,
-        });
-
-        if (!result?.cancelled) {
-            setImage(result.uri);
-        }
-    };
 
 
     return (
         <>
-            
+            <ScrollView>
                 <View style={styles.container}>
                     <Text style={styles.fonts2} h4>  Title:  {partipantName}</Text>
                     <Card containerStyle={{ marginTop: 17, padding: 20, borderRadius: 10 }}>
@@ -210,7 +185,7 @@ const CreateRelease = () => {
                             height: 250,
                             borderRadius: 20,
                             opacity: 0.2
-                        }} borderRadius={'20px'} onPress={pickImage} type='outline'> 1400 X 1400 px .jgp</Button>
+                        }} borderRadius={'20px'} type='outline'> 1400 X 1400 px .jgp</Button>
                         {image && <Image source={{ uri: image }} style={styles.image} />}
 
                         <Text style={{ fontSize: 18, marginBottom: 10, color: '#003F5C', padding: 25 }}>Cover Art</Text>
@@ -219,7 +194,7 @@ const CreateRelease = () => {
 
                             borderRadius: 20,
                             opacity: 0.2
-                        }} borderRadius={'20px'} onPress={pickImage} type='outline'> Lossless.WAV</Button>
+                        }} borderRadius={'20px'} type='outline'> Lossless.WAV</Button>
                         {image && <Image source={{ uri: image }} style={styles.image} />}
 
                         <Text style={{ fontSize: 18, marginBottom: 10, color: '#003F5C', padding: 25 }}>Track</Text>
@@ -303,10 +278,19 @@ const CreateRelease = () => {
                         />
 
                     </Card>
-                    
 
+                    <Card containerStyle={{ marginTop: 17, padding: 20, borderRadius: 10 }}>
+
+
+                        <Button buttonColor='#F47133' style={{ width: '100%', marginLeft: 0, borderRadius: 10 }} mode="contained" onPress={() =>    ToastAndroid.show('Request sent successfully!', ToastAndroid.SHORT)}>
+                            Deliver to Stores
+                        </Button>
+
+
+
+                        </Card>
                 </View>
-         
+            </ScrollView>
         </>
     );
 };
@@ -385,4 +369,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default CreateRelease;
+export default Confirm;

@@ -15,6 +15,7 @@
     "@rneui/base": "^4.0.0-rc.7",
     "@rneui/themed": "^4.0.0-rc.8",
     "expo": "~51.0.11",
+    "expo-image-picker": "~15.0.7",
     "expo-router": "^3.5.18",
     "expo-status-bar": "~1.12.1",
     "react": "18.2.0",
@@ -24,7 +25,8 @@
     "react-native-otp-entry": "^1.7.0",
     "react-native-paper": "^5.12.3",
     "react-native-reanimated": "~3.10.1",
-    "expo-image-picker": "~15.0.7"
+    "react-native-toast": "^1.0.1",
+    "react-native-wizard": "^2.1.1"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"

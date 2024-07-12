@@ -11,6 +11,8 @@ import Services from '../../components/Services';
 import Stats from '../../components/Stats';
 import CreateRelease from '../../components/CreateRelease';
 import Notifications from '../../components/Notifications';
+import Release from '../../components/Release';
+import Music from '../../components/Music';
 function HomeScreen({ navigation }) {
   return (
     <View style={{ flex: 1, alignItems: 'flex-start', justifyContent: 'flex-start' }}>
@@ -29,12 +31,14 @@ function NotificationsScreen({ navigation }) {
 }
 function CreateReleaseScreen({ navigation }) {
   return (
-    <CreateRelease />
+    // <CreateRelease />
+    <Release/>
   );
 }
 function MusicLibraryScreen({ navigation }) {
   return (
-    <MusicLibrary />
+    // <MusicLibrary />
+    <Music/>
   );
 }
 function ServicesScreen({ navigation }) {

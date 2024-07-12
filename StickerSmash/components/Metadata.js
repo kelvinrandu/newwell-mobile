@@ -35,43 +35,17 @@ const users = [
 
 
 
-const CreateRelease = () => {
+const Metadata = () => {
     const { colors } = useTheme();
     const [partipantName, setParticipantName] = useState('');
     const [roomName, setRoomName] = useState('');
     const [image, setImage] = useState(null);
-    useEffect(() => {
-        (async () => {
-            if (Platform.OS !== 'web') {
-                const libraryStatus = await ImagePicker.requestMediaLibraryPermissionsAsync();
-                if (libraryStatus.status !== 'granted') {
-                    alert('Sorry, we need camera roll permissions to make this work!');
-                }
-
-                const cameraStatus = await ImagePicker.requestCameraPermissionsAsync();
-                if (cameraStatus.status !== 'granted') {
-                    alert('Sorry, we need camera permissions to make this work!');
-                }
-            }
-        })();
-    }, []);
-    const pickImage = async () => {
-        let result = await ImagePicker.launchImageLibraryAsync({
-            mediaTypes: ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4, 3],
-            quality: 1,
-        });
-
-        if (!result?.cancelled) {
-            setImage(result.uri);
-        }
-    };
-
+    
+    
 
     return (
         <>
-            
+          
                 <View style={styles.container}>
                     <Text style={styles.fonts2} h4>  Title:  {partipantName}</Text>
                     <Card containerStyle={{ marginTop: 17, padding: 20, borderRadius: 10 }}>
@@ -210,7 +184,7 @@ const CreateRelease = () => {
                             height: 250,
                             borderRadius: 20,
                             opacity: 0.2
-                        }} borderRadius={'20px'} onPress={pickImage} type='outline'> 1400 X 1400 px .jgp</Button>
+                        }} borderRadius={'20px'}  type='outline'> 1400 X 1400 px .jgp</Button>
                         {image && <Image source={{ uri: image }} style={styles.image} />}
 
                         <Text style={{ fontSize: 18, marginBottom: 10, color: '#003F5C', padding: 25 }}>Cover Art</Text>
@@ -219,7 +193,7 @@ const CreateRelease = () => {
 
                             borderRadius: 20,
                             opacity: 0.2
-                        }} borderRadius={'20px'} onPress={pickImage} type='outline'> Lossless.WAV</Button>
+                        }} borderRadius={'20px'}  type='outline'> Lossless.WAV</Button>
                         {image && <Image source={{ uri: image }} style={styles.image} />}
 
                         <Text style={{ fontSize: 18, marginBottom: 10, color: '#003F5C', padding: 25 }}>Track</Text>
@@ -303,10 +277,10 @@ const CreateRelease = () => {
                         />
 
                     </Card>
-                    
+     
 
                 </View>
-         
+          
         </>
     );
 };
@@ -385,4 +359,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default CreateRelease;
+export default Metadata;

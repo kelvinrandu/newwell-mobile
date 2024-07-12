@@ -5,7 +5,7 @@ import { Text, Card, Button, Icon } from '@rneui/themed';
 const users = [
     {
         name: 'brynn',
-        avatar: 'https://uifaces.co/our-content/donated/1H_7AxP0.jpg',
+        avatar:'https://images.pexels.com/photos/598745/pexels-photo-598745.jpeg?crop=faces&fit=crop&h=200&w=200&auto=compress&cs=tinysrgb',
     },
     {
         name: 'thot leader',
@@ -14,7 +14,7 @@ const users = [
     },
     {
         name: 'jsa',
-        avatar: 'https://uifaces.co/our-content/donated/bUkmHPKs.jpg',
+        avatar: 'https://randomuser.me/api/portraits/men/4.jpg',
     },
     {
         name: 'talhaconcepts',
@@ -22,7 +22,7 @@ const users = [
     },
     {
         name: 'andy vitale',
-        avatar: 'https://uifaces.co/our-content/donated/NY9hnAbp.jpg',
+        avatar: 'https://images-na.ssl-images-amazon.com/images/M/MV5BMTgxMTc1MTYzM15BMl5BanBnXkFtZTgwNzI5NjMwOTE@._V1_UY256_CR16,0,172,256_AL_.jpg',
     },
     {
         name: 'katy friedson',
@@ -38,71 +38,7 @@ const MusicLibrary = () => {
         <>
             <ScrollView>
                 <View style={styles.container}>
-                    <Text style={styles.fonts2} h4>  music library !</Text>
-                    <Card containerStyle={{ marginTop: 17, padding: 20, borderRadius: 10 }}>
-                        <Text style={styles.fonts} h3>Ms Anima,</Text>
-                        {/* <Card.Divider /> */}
-                        <Text style={styles.fonts}>Hope you are good,</Text>
-                        <View style={styles.display}>
-                            <Text style={styles.fonts}>Account : Basic</Text>
-                            <Text style={styles.fonts}>Upgrade</Text>
-                        </View>
-                        <Text style={styles.fonts}>Your music business in one place and under your control.</Text>
-                        <View style={styles.display3}>
-                            <Button buttonStyle={{
 
-
-                                borderRadius: 20,
-                            }}
-                                // titleStyle={{ color: 'rgba(252, 104, 115, 1)', fontWeight: '700' }} 
-                                type='outline' style={styles.button2}>
-                                Update your Profile
-                            </Button>
-                            <Text style={styles.fonts}>Upgrade</Text>
-                        </View>
-
-                    </Card>
-                    <Card containerStyle={{ marginTop: 17, padding: 20, borderRadius: 10 }}>
-                        <Text style={styles.fonts2} h5>My Music Ratings</Text>
-                        {/* <Card.Divider /> */}
-
-                        <View style={styles.display2}>
-                            <Text style={styles.fonts3}>No Music found!</Text>
-                            <Text style={styles.fonts}>Best of the best of,
-                                Your music will show here.</Text>
-
-                            <Button buttonStyle={{
-                                backgroundColor: 'rgba(255, 219, 225, 1)',
-                                color: 'rgba(252, 104, 115, 1)',
-
-                                borderColor: 'transparent',
-                                borderWidth: 0,
-                                borderRadius: 4,
-                            }} titleStyle={{ color: 'rgba(252, 104, 115, 1)', fontWeight: '700' }} type='outline' style={styles.button2}>
-                                Start Now
-                            </Button>
-                        </View>
-
-
-
-                    </Card>
-                    <Card containerStyle={{ marginTop: 17, padding: 20, borderRadius: 10 }}>
-                        <Text style={styles.fonts2} h5>Distribute Lyrics</Text>
-                        {/* <Card.Divider /> */}
-                        <Text style={styles.fonts}>Lyrics on MusixMatch and Shazam</Text>
-                        <View style={styles.display3}>
-                            <Button buttonStyle={{
-
-
-                                borderRadius: 20,
-                            }} style={styles.button} type='outline'>
-                                Start Now
-                            </Button>
-                        </View>
-
-
-
-                    </Card>
                     <Card containerStyle={{ marginTop: 17, padding: 20, borderRadius: 10 }}>
                         <Text style={styles.fonts2} h5>Music Copyrights</Text>
                         {/* <Card.Divider /> */}
@@ -121,11 +57,11 @@ const MusicLibrary = () => {
                     </Card>
 
                     <Card containerStyle={{ marginBottom: 20, marginTop: 17, padding: 20, borderRadius: 10 }}>
-
+{/* 
                         <View style={styles.display}>
                             <Text style={styles.fonts2} h5>Notifications</Text>
                             <Button title="Clear" type="clear" />
-                        </View>
+                        </View> */}
 
                         {users.map((u, i) => {
                             return (
@@ -135,7 +71,10 @@ const MusicLibrary = () => {
                                         resizeMode="cover"
                                         source={{ uri: u.avatar }}
                                     />
+                                    <View>
                                     <Text style={styles.name}>{u.name}</Text>
+                                        </View>
+                                  
                                 </View>
                             );
                         })}
@@ -198,8 +137,8 @@ const styles = StyleSheet.create({
         marginBottom: 6,
     },
     image: {
-        width: 30,
-        height: 30,
+        width: 60,
+        height: 60,
         marginRight: 10,
     },
     name: {

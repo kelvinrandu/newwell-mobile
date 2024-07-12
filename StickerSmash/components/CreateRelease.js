@@ -1,6 +1,8 @@
-import React from 'react';
-import { View, ScrollView, StyleSheet, Image } from 'react-native';
-import { Text, Card, Button, Icon } from '@rneui/themed';
+import React, { useState, useEffect } from 'react';
+import { View, ScrollView, StyleSheet, Image, TextInput, Pressable } from 'react-native';
+import { Text, Button, Card, Icon } from '@rneui/themed';
+import * as ImagePicker from 'expo-image-picker';
+import { useTheme } from '@react-navigation/native';
 
 const users = [
     {
@@ -34,112 +36,289 @@ const users = [
 
 
 const CreateRelease = () => {
+    const { colors } = useTheme();
+    const [partipantName, setParticipantName] = useState('');
+    const [roomName, setRoomName] = useState('');
+    const [image, setImage] = useState(null);
+    useEffect(() => {
+        (async () => {
+            if (Platform.OS !== 'web') {
+                const libraryStatus = await ImagePicker.requestMediaLibraryPermissionsAsync();
+                if (libraryStatus.status !== 'granted') {
+                    alert('Sorry, we need camera roll permissions to make this work!');
+                }
+
+                const cameraStatus = await ImagePicker.requestCameraPermissionsAsync();
+                if (cameraStatus.status !== 'granted') {
+                    alert('Sorry, we need camera permissions to make this work!');
+                }
+            }
+        })();
+    }, []);
+    const pickImage = async () => {
+        let result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.All,
+            allowsEditing: true,
+            aspect: [4, 3],
+            quality: 1,
+        });
+
+        if (!result?.cancelled) {
+            setImage(result.uri);
+        }
+    };
+
+
     return (
         <>
             <ScrollView>
                 <View style={styles.container}>
-                    <Text style={styles.fonts2} h4>  Create Release !</Text>
+                    <Text style={styles.fonts2} h4>  Title:  {partipantName}</Text>
                     <Card containerStyle={{ marginTop: 17, padding: 20, borderRadius: 10 }}>
-                        <Text style={styles.fonts} h3>Ms Anima,</Text>
-                        {/* <Card.Divider /> */}
-                        <Text style={styles.fonts}>Hope you are good,</Text>
-                        <View style={styles.display}>
-                            <Text style={styles.fonts}>Account : Basic</Text>
-                            <Text style={styles.fonts}>Upgrade</Text>
-                        </View>
-                        <Text style={styles.fonts}>Your music business in one place and under your control.</Text>
-                        <View style={styles.display3}>
-                            <Button buttonStyle={{
-
-
-                                borderRadius: 20,
+                        <Text textAlign='left' style={{ color: colors.text }}>Title</Text>
+                        <TextInput
+                            style={{
+                                color: colors.text,
+                                borderColor: colors.border,
+                                borderRadius: 10,
+                                ...styles.input,
                             }}
-                                // titleStyle={{ color: 'rgba(252, 104, 115, 1)', fontWeight: '700' }} 
-                                type='outline' style={styles.button2}>
-                                Update your Profile
-                            </Button>
-                            <Text style={styles.fonts}>Upgrade</Text>
-                        </View>
+                            onChangeText={setParticipantName}
+                            type='email'
+                            value={partipantName}
+                        />
+                        <Text textAlign='left' style={{ color: colors.text }}>Type</Text>
+                        <TextInput
+                            style={{
+                                color: colors.text,
+                                borderColor: colors.border,
+                                borderRadius: 10,
+                                ...styles.input,
+                            }}
+                            // onChangeText={setParticipantName}
+                            type='email'
+                        // value={partipantName}
+                        />
+                        <Text textAlign='left' style={{ color: colors.text }}>Genre</Text>
+                        <TextInput
+                            style={{
+                                color: colors.text,
+                                borderColor: colors.border,
+                                borderRadius: 10,
+                                ...styles.input,
+                            }}
+                            // onChangeText={setParticipantName}
+                            type='email'
+                        // value={partipantName}
+                        />
+                    </Card>
+
+                    <Card containerStyle={{ marginTop: 17, padding: 20, borderRadius: 10 }}>
+                        <Text textAlign='left' style={{ color: colors.text }}>Title</Text>
+                        <TextInput
+                            style={{
+                                color: colors.text,
+                                borderColor: colors.border,
+                                borderRadius: 10,
+                                ...styles.input,
+                            }}
+                            // onChangeText={setParticipantName}
+                            type='email'
+                        // value={partipantName}
+                        />
+                        <Text textAlign='left' style={{ color: colors.text }}>Type</Text>
+                        <TextInput
+                            style={{
+                                color: colors.text,
+                                borderColor: colors.border,
+                                borderRadius: 10,
+                                ...styles.input,
+                            }}
+                            // onChangeText={setParticipantName}
+                            type='email'
+                        // value={partipantName}
+                        />
+                        <Text textAlign='left' style={{ color: colors.text }}>Genre</Text>
+                        <TextInput
+                            style={{
+                                color: colors.text,
+                                borderColor: colors.border,
+                                borderRadius: 10,
+                                ...styles.input,
+                            }}
+                            // onChangeText={setParticipantName}
+                            type='email'
+                        // value={partipantName}
+                        />
+                        <Text textAlign='left' style={{ color: colors.text }}>Title</Text>
+                        <TextInput
+                            style={{
+                                color: colors.text,
+                                borderColor: colors.border,
+                                borderRadius: 10,
+                                ...styles.input,
+                            }}
+                            // onChangeText={setParticipantName}
+                            type='email'
+                        // value={partipantName}
+                        />
+                        <Text textAlign='left' style={{ color: colors.text }}>Type</Text>
+                        <TextInput
+                            style={{
+                                color: colors.text,
+                                borderColor: colors.border,
+                                borderRadius: 10,
+                                ...styles.input,
+                            }}
+                            // onChangeText={setParticipantName}
+                            type='email'
+                        // value={partipantName}
+                        />
+                        <Text textAlign='left' style={{ color: colors.text }}>Genre</Text>
+                        <TextInput
+                            style={{
+                                color: colors.text,
+                                borderColor: colors.border,
+                                borderRadius: 10,
+                                ...styles.input,
+                            }}
+                            // onChangeText={setParticipantName}
+                            type='email'
+                        // value={partipantName}
+                        />
+                        <Text textAlign='left' style={{ color: colors.text }}>Genre</Text>
+                        <TextInput
+                            style={{
+                                color: colors.text,
+                                borderColor: colors.border,
+                                borderRadius: 10,
+                                ...styles.input,
+                            }}
+                            // onChangeText={setParticipantName}
+                            type='email'
+                        // value={partipantName}
+                        />
+
+                    </Card>
+
+                    <Card containerStyle={{ marginTop: 17, padding: 20, borderRadius: 10 }}>
+                        <Text style={styles.fonts2} h5>Media Uploader</Text>
+                        {/* <Card.Divider /> */}
+                        {/* <Button title="Pick" onPress={pickImage} /> */}
+                        <Button buttonStyle={{
+
+                            height: 250,
+                            borderRadius: 20,
+                            opacity: 0.2
+                        }} borderRadius={'20px'} onPress={pickImage} type='outline'> 1400 X 1400 px .jgp</Button>
+                        {image && <Image source={{ uri: image }} style={styles.image} />}
+
+                        <Text style={{ fontSize: 18, marginBottom: 10, color: '#003F5C', padding: 25 }}>Cover Art</Text>
+                        <Button buttonStyle={{
+                            height: 250,
+
+                            borderRadius: 20,
+                            opacity: 0.2
+                        }} borderRadius={'20px'} onPress={pickImage} type='outline'> Lossless.WAV</Button>
+                        {image && <Image source={{ uri: image }} style={styles.image} />}
+
+                        <Text style={{ fontSize: 18, marginBottom: 10, color: '#003F5C', padding: 25 }}>Track</Text>
+
+
+
+                    </Card>
+
+                    <Card containerStyle={{ marginTop: 17, padding: 20, borderRadius: 10 }}>
+                        <Text textAlign='left' style={{ color: colors.text }}>Title</Text>
+                        <TextInput
+                            style={{
+                                color: colors.text,
+                                borderColor: colors.border,
+                                borderRadius: 10,
+                                ...styles.input,
+                            }}
+                            // onChangeText={setParticipantName}
+                            type='email'
+                        // value={partipantName}
+                        />
+                        <Text textAlign='left' style={{ color: colors.text }}>Type</Text>
+                        <TextInput
+                            style={{
+                                color: colors.text,
+                                borderColor: colors.border,
+                                borderRadius: 10,
+                                ...styles.input,
+                            }}
+                            // onChangeText={setParticipantName}
+                            type='email'
+                        // value={partipantName}
+                        />
+                        <Text textAlign='left' style={{ color: colors.text }}>Genre</Text>
+                        <TextInput
+                            style={{
+                                color: colors.text,
+                                borderColor: colors.border,
+                                borderRadius: 10,
+                                ...styles.input,
+                            }}
+                            // onChangeText={setParticipantName}
+                            type='email'
+                        // value={partipantName}
+                        />
+                        <Text textAlign='left' style={{ color: colors.text }}>Title</Text>
+                        <TextInput
+                            style={{
+                                color: colors.text,
+                                borderColor: colors.border,
+                                borderRadius: 10,
+                                ...styles.input,
+                            }}
+                            // onChangeText={setParticipantName}
+                            type='email'
+                        // value={partipantName}
+                        />
+                        <Text textAlign='left' style={{ color: colors.text }}>Type</Text>
+                        <TextInput
+                            style={{
+                                color: colors.text,
+                                borderColor: colors.border,
+                                borderRadius: 10,
+                                ...styles.input,
+                            }}
+                            // onChangeText={setParticipantName}
+                            type='email'
+                        // value={partipantName}
+                        />
+                        <Text textAlign='left' style={{ color: colors.text }}>Genre</Text>
+                        <TextInput
+                            style={{
+                                color: colors.text,
+                                borderColor: colors.border,
+                                borderRadius: 10,
+                                ...styles.input,
+                            }}
+                            // onChangeText={setParticipantName}
+                            type='email'
+                        // value={partipantName}
+                        />
 
                     </Card>
                     <Card containerStyle={{ marginTop: 17, padding: 20, borderRadius: 10 }}>
-                        <Text style={styles.fonts2} h5>My Music Ratings</Text>
-                        {/* <Card.Divider /> */}
 
-                        <View style={styles.display2}>
-                            <Text style={styles.fonts3}>No Music found!</Text>
-                            <Text style={styles.fonts}>Best of the best of,
-                                Your music will show here.</Text>
-
-                            <Button buttonStyle={{
-                                backgroundColor: 'rgba(255, 219, 225, 1)',
-                                color: 'rgba(252, 104, 115, 1)',
-
-                                borderColor: 'transparent',
-                                borderWidth: 0,
-                                borderRadius: 4,
-                            }} titleStyle={{ color: 'rgba(252, 104, 115, 1)', fontWeight: '700' }} type='outline' style={styles.button2}>
-                                Start Now
-                            </Button>
-                        </View>
-
-
-
-                    </Card>
-                    <Card containerStyle={{ marginTop: 17, padding: 20, borderRadius: 10 }}>
-                        <Text style={styles.fonts2} h5>Distribute Lyrics</Text>
-                        {/* <Card.Divider /> */}
-                        <Text style={styles.fonts}>Lyrics on MusixMatch and Shazam</Text>
                         <View style={styles.display3}>
                             <Button buttonStyle={{
 
 
                                 borderRadius: 20,
                             }} style={styles.button} type='outline'>
-                                Start Now
+                                Next
                             </Button>
                         </View>
 
 
 
                     </Card>
-                    <Card containerStyle={{ marginTop: 17, padding: 20, borderRadius: 10 }}>
-                        <Text style={styles.fonts2} h5>Music Copyrights</Text>
-                        {/* <Card.Divider /> */}
-                        <Text style={styles.fonts}>Register content ownership
-                            Available in selected regions</Text>
-                        <View style={styles.display3}>
-                            <Button buttonStyle={{
 
-
-                                borderRadius: 20,
-                            }} borderRadius={'20px'} type='outline'> Start Now</Button>
-                        </View>
-
-
-
-                    </Card>
-
-                    <Card containerStyle={{ marginBottom: 20, marginTop: 17, padding: 20, borderRadius: 10 }}>
-
-                        <View style={styles.display}>
-                            <Text style={styles.fonts2} h5>Notifications</Text>
-                            <Button title="Clear" type="clear" />
-                        </View>
-
-                        {users.map((u, i) => {
-                            return (
-                                <View key={i} style={styles.user}>
-                                    <Image
-                                        style={styles.image}
-                                        resizeMode="cover"
-                                        source={{ uri: u.avatar }}
-                                    />
-                                    <Text style={styles.name}>{u.name}</Text>
-                                </View>
-                            );
-                        })}
-                    </Card>
                 </View>
             </ScrollView>
         </>
@@ -150,6 +329,11 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
     },
+    image: {
+        width: 200,
+        height: 200,
+        marginTop: 20,
+    },
     fonts: {
         marginBottom: 8,
     },
@@ -157,6 +341,13 @@ const styles = StyleSheet.create({
         fontWeight: 800,
         fontSize: 18,
         paddingBottom: 6
+    },
+    input: {
+        width: '100%',
+        height: 40,
+        margin: 12,
+        borderWidth: 1,
+        padding: 10,
     },
     fonts3: {
         fontWeight: 600,

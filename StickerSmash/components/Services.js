@@ -38,30 +38,74 @@ const Services = () => {
         <>
             <ScrollView>
                 <View style={styles.container}>
-                  
-             
-                    <Card containerStyle={{ marginTop: 17, padding: 20, borderRadius: 10 }}>
-                        <Text style={styles.fonts2} h5>My Music Ratings</Text>
+                <Card containerStyle={{ backgroundColor:'#E5F7FF', marginTop: 17, padding: 20, borderRadius: 10 }}>
+                        <Text style={styles.fonts} h4>Distribute Lyrics </Text>
                         {/* <Card.Divider /> */}
-
-                        <View style={styles.display2}>
-                            <Text style={styles.fonts3}>No Music found!</Text>
-                            <Text style={styles.fonts}>Best of the best of,
-                                Your music will show here.</Text>
-
+                        <Text style={styles.fonts}>Lyrics on MusixMatch and Shazam</Text>
+                        <View style={styles.display}>
+                      
+                        </View>
+                        
+                        <View style={styles.display3}>
                             <Button buttonStyle={{
-                                backgroundColor: 'rgba(255, 219, 225, 1)',
-                                color: 'rgba(252, 104, 115, 1)',
 
-                                borderColor: 'transparent',
-                                borderWidth: 0,
-                                borderRadius: 4,
-                            }} titleStyle={{ color: 'rgba(252, 104, 115, 1)', fontWeight: '700' }} type='outline' style={styles.button2}>
+
+                                borderRadius: 20,
+                            }}
+                                // titleStyle={{ color: 'rgba(252, 104, 115, 1)', fontWeight: '700' }} 
+                                type='outline' style={styles.button2}>
                                 Start Now
                             </Button>
+                           
                         </View>
 
+                    </Card>
+                    <Card containerStyle={{ marginTop: 17,backgroundColor:'#ECEAFE', padding: 20, borderRadius: 10 }}>
+                        <Text style={styles.fonts} h4>Content Copyrights</Text>
+                        {/* <Card.Divider /> */}
+                        <Text style={styles.fonts}>Register content ownership
+                        Available in selected regions</Text>
+                        <View style={styles.display}>
+                        
+                        </View>
+                        
+                        <View style={styles.display3}>
+                            <Button buttonStyle={{
 
+
+                                borderRadius: 20,
+                            }}
+                                // titleStyle={{ color: 'rgba(252, 104, 115, 1)', fontWeight: '700' }} 
+                                type='outline' style={styles.button2}>
+                                   Start Now
+                            </Button>
+                          
+                        </View>
+
+                    </Card>
+                    <Card containerStyle={{ marginTop: 17, backgroundColor:'#FFF0E6',padding: 20, borderRadius: 10 }}>
+                        <Text style={styles.fonts} h4>Marketing</Text>
+                        {/* <Card.Divider /> */}
+                        <Text style={styles.fonts}>Smart Links
+Content Promotion, 
+Air play and Playlisting,
+Brand activations.</Text>
+                        <View style={styles.display}>
+                        
+                        </View>
+                        
+                        <View style={styles.display3}>
+                            <Button buttonStyle={{
+
+
+                                borderRadius: 20,
+                            }}
+                                // titleStyle={{ color: 'rgba(252, 104, 115, 1)', fontWeight: '700' }} 
+                                type='outline' style={styles.button2}>
+                                Start Now
+                            </Button>
+                            
+                        </View>
 
                     </Card>
          

@@ -39,7 +39,7 @@ useEffect(()=>{
     loadToken()
 
 
-},[])
+},[isLoggedIn])
 
     const register =async (email,password)=>{
         try{
@@ -48,26 +48,83 @@ useEffect(()=>{
             return {error:true,msg:(e).response.data.msg}
         }
     }
+    
     const login =async (email,password)=>{
         try{
-        const result =await axios.post(`${API_URL}/api/auth/jwt-signin`,{email,password})
-        console.log('login succesfully',result.data)
-        // if(result.data.jwt){
-        //     setIsLoggedIn(true)
-        //     setAuthState({
-        //         token:result.data.jwt,
-        //         authenticated:true
-        //     });
-        //     console.log('auth',authState)
-        //     axios.defaults.headers.common['Authorization']=`Bearer ${result.data.jwt}`;
-        //     await SecureStore.setItemAsync(TOKEN_KEY,result.data.jwt)
+        const result =await axios.post(`${API_URL}/api/auth/jwt-signin`,{email,password}).then(async response=>{
+            console.log('results',response.data)
+                    if(response?.data?.jwt){
+            const result1 =await axios.post(`${API_URL}/api/send-otp`,{email})
+            console.log('otp',result1)
+            // setIsLoggedIn(true)
+            // setAuthState({
+            //     token:result.data.jwt,
+            //     authenticated:true
+            // });
+            // console.log('auth',authState)
+            // axios.defaults.headers.common['Authorization']=`Bearer ${result.data.jwt}`;
+            // await SecureStore.setItemAsync(TOKEN_KEY,result.data.jwt)
+            return response?.data;
+
+        }
+        return {error:true}
+        })
+  
+
+
+        }catch(e){
+            return {error:true,msg:(e).response.data.msg}
+        }
+    }
+    const verifyOtp =async (email,code)=>{
+        try{
+            console.log('otp',email,code)
+            const otp=parseInt(code)
+        const result = await axios.post(`${API_URL}/api/verify-otp`,{ otp,email}).then(async response=>{
+
+                                if(response.data.jwt){
+
+         
+            setIsLoggedIn(true)
+            setAuthState({
+                token:response.data.jwt,
+                authenticated:true
+            });
+            console.log('auth',authState)
+            axios.defaults.headers.common['Authorization']=`Bearer ${response.data.jwt}`;
+            await SecureStore.setItemAsync(TOKEN_KEY,response.data.jwt)
+            return response;
+
+        }
+        return {error:true}
+        }
+           
+            
+                    // if(result.data.jwt){
+
+        //     console.log('otp',result)
+        //     // setIsLoggedIn(true)
+        //     // setAuthState({
+        //     //     token:result.data.jwt,
+        //     //     authenticated:true
+        //     // });
+        //     // console.log('auth',authState)
+        //     // axios.defaults.headers.common['Authorization']=`Bearer ${result.data.jwt}`;
+        //     // await SecureStore.setItemAsync(TOKEN_KEY,result.data.jwt)
         //     return result;
 
         // }
         // return {error:true}
+        
+        )
+        // console.log('login succesfully',result)
+        // return result;
+
+
 
 
         }catch(e){
+            console.log('error',e)
             return {error:true,msg:(e).response.data.msg}
         }
     }
@@ -83,6 +140,7 @@ useEffect(()=>{
     const value ={
         onRegister:register,
         onLogin:login,
+        verifyOtp,
         onLogut:logout,
         isLoggedIn,
         authState,

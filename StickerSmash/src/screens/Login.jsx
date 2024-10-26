@@ -48,7 +48,9 @@ export default function Login () {
         animationType: "slide-in",
       });
       // const results = await onLogin( email.value,password.value)
-      navigation.navigate('OtpPage')
+      navigation.navigate('OtpPage',{
+        email:email.value,
+      })
 
     }
     // axios.post('https://nfa.newwell.app/api/auth/jwt-signin', {

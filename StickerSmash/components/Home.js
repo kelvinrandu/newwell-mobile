@@ -1,6 +1,8 @@
 import React from 'react';
 import { View, ScrollView, StyleSheet, Image } from 'react-native';
 import { Text, Card, Button, Icon } from '@rneui/themed';
+import { useAuth } from "../context/AuthContext";
+
 
 const users = [
     {
@@ -34,6 +36,8 @@ const users = [
 
 
 const Home = () => {
+    const{authState,onLogut,onLogin,fetchPersonalInfo } =useAuth();
+    console.log('auth',authState)
     return (
         <>
             <ScrollView>

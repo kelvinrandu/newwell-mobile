@@ -1,0 +1,5 @@
+export { default as LoginScreen } from './Login'
+export { default as OtpScreen } from './Otp'
+export { default as StartScreen } from './StartScreen'
+export { default as RegisterScreen } from './Register'
+export { default as DashboardScreen } from './Dashboard'

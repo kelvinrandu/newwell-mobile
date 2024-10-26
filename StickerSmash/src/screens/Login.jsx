@@ -2,6 +2,7 @@
 import {useState} from 'react';
 import {useTheme} from '@react-navigation/native';
 import { router } from 'expo-router';
+
 import {
   NavigationContainer,
   useNavigationContainerRef,
@@ -11,16 +12,85 @@ import {
   // Button,
    StyleSheet, Text, TextInput,ToastAndroid, View} from 'react-native';
    import { Button } from 'react-native-paper';
+   import { useAuth } from "../../context/AuthContext";
+   import { useToast } from "react-native-toast-notifications";
 
 // const URL_KEY = 'API2axhtoc6oUxm';
 // const TOKEN_KEY = 'SVVLMwejKKlqmgf9LV255fWOmEeLLEYM41O1Ma1rIZ6B';
 
-export const Login = () => {
-  const [partipantName, setParticipantName] = useState('');
-  const [roomName, setRoomName] = useState('');
+export default function Login () {
+  const [email, setEmail] = useState({ value: '', error: '' })
+  const [password, setPassword] = useState({ value: '', error: '' })
   const [isLoading, setIsloading] = useState(false);
   const navigation = useNavigation();
   const {colors} = useTheme();
+  const toast = useToast();
+  const{authState,onLogut,onLogin } =useAuth();
+
+  const login = async () => { 
+    const results = await onLogin( email.value,password.value)
+    console.log('results',results)
+    if(results?.error){
+        toast.show("Login unsuccesful", {
+          type: "danger",
+          placement: "top",
+          duration: 4000,
+          offset: 30,
+          animationType: "slide-in",
+        });
+
+    }else{
+      toast.show("Otp sent", {
+        type: "success",
+        placement: "top",
+        duration: 4000,
+        offset: 30,
+        animationType: "slide-in",
+      });
+      // const results = await onLogin( email.value,password.value)
+      navigation.navigate('OtpPage')
+
+    }
+    // axios.post('https://nfa.newwell.app/api/auth/jwt-signin', {
+    //   email: email.value,
+    //   password: password.value
+    // })
+    // .then(function (response) {
+    //   console.log('response',response.data);
+    //   console.log(response?.data['jwt'])
+    //   // response?.data['jwt']? console.log('login successfull'):console.log('wrong credentials')
+
+    //   if(response?.data['jwt']){
+    //     // toast.show("Login succesful", {
+    //     //   type: "success",
+    //     //   placement: "top",
+    //     //   duration: 4000,
+    //     //   offset: 30,
+    //     //   animationType: "slide-in",
+    //     // });
+    // //     navigation.reset({
+    // //   index: 0,
+    // //   routes: [{ name: 'Dashboard' }],
+    // // })
+
+    //   }
+    //   else{
+    //     // toast.show("Login unsuccesful", {
+    //     //   type: "danger",
+    //     //   placement: "top",
+    //     //   duration: 4000,
+    //     //   offset: 30,
+    //     //   animationType: "slide-in",
+    //     // });
+
+    //   }
+    // })
+    // .catch(function (error) {
+    //   console.log('eror',error);
+    // });
+    
+
+  }
 
 
   return (
@@ -34,9 +104,16 @@ export const Login = () => {
           borderRadius:10,
           ...styles.input,
         }}
-        onChangeText={setParticipantName}
-        type='email'
-        value={partipantName}
+        label="Email"
+        returnKeyType="next"
+        value={email.value}
+        onChangeText={(text) => setEmail({ value: text, error: '' })}
+        error={!!email.error}
+        errorText={email.error}
+        autoCapitalize="none"
+        autoCompleteType="email"
+        textContentType="emailAddress"
+        keyboardType="email-address"
       />
 
       <Text textAlign='left' style={{color: colors.text,alignItems:'flex-start',alignContent:'flex-start',textAlign:'left',justifyContent:'flex-start'}}>Password</Text>
@@ -51,21 +128,20 @@ export const Login = () => {
           borderColor: colors.border,
           ...styles.input,
         }}
-        
-        // onChangeText={setRoomName}
-        // value={roomName}
+        label="Password"
+        returnKeyType="done"
+        value={password.value}
+        onChangeText={(text) => setPassword({ value: text, error: '' })}
+        error={!!password.error}
+        errorText={password.error}
+     
       />
       <Text  textAlign='left' style={{color: colors.text,paddingBottom:20}}>Forgot Password</Text>
-      {/* {isLoading ? (
-        <Button color={'red'} title="Connecting.." />
-      ) : (
-        <Button containerViewStyle={{width: '100%', marginLeft: 0}} borderRadius={10} style={{width:'80%',borderRadius:20}} color={'red'} title="Sign In" onPress={()=> 
-          navigation.navigate('OtpPage')
-         
-        }
-          />
-      )} */}
-        <Button buttonColor='#F47133' style={{width: '100%', marginLeft: 0,borderRadius:10}} mode="contained" onPress={() =>   navigation.navigate('OtpPage')}>
+
+        <Button buttonColor='#F47133' style={{width: '100%', marginLeft: 0,borderRadius:10}} mode="contained"
+        //  onPress={() =>   navigation.navigate('OtpPage')}
+        onPress={login}
+         >
         Sign In
   </Button>
 

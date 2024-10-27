@@ -57,14 +57,14 @@ export const AuthProvider = ({ children }) => {
     const login = async (email, password) => {
         try {
             const result = await axios.post(`${API_URL}/api/auth/jwt-signin`, { email, password }).then(async response => {
-                console.log('results', response.data)
-                if (response?.data?.jwt) {
+               const res= await response?.data
+                if (res?.jwt) {
                     const result1 = await axios.post(`${API_URL}/api/send-otp`, { email })
 
-                    return response?.data;
+                    return res;
 
-                }
-                return { error: true }
+                }else{  return { error: true }}
+              
             })
 
 
@@ -78,8 +78,8 @@ export const AuthProvider = ({ children }) => {
             console.log('otp', email, code)
             const otp = parseInt(code)
             const result = await axios.post(`${API_URL}/api/verify-otp`, { otp, email }).then(async response => {
-
-                if (response.data.jwt) {
+            const res= await response?.data
+                if (res?.jwt) {
 
 
                     setIsLoggedIn(true)
@@ -92,10 +92,13 @@ export const AuthProvider = ({ children }) => {
                     axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.jwt}`;
                     await SecureStore.setItemAsync(TOKEN_KEY, response.data.jwt)
                     await SecureStore.setItemAsync(EMAIL_KEY, email)
-                    return response;
 
+                    return await res?.jwt;
+
+                }else{
+                    return { error: true }
                 }
-                return { error: true }
+              
             }
 
             )

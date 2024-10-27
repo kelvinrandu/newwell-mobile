@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, ScrollView, StyleSheet, Image, TextInput, Pressable } from 'react-native';
+import { View, ScrollView, StyleSheet, Image, TextInput, Pressable ,Platform} from 'react-native';
 import { Text, Button, Card, Icon } from '@rneui/themed';
 import * as ImagePicker from 'expo-image-picker';
 import { useTheme } from '@react-navigation/native';

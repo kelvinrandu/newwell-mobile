@@ -9,8 +9,8 @@ import Routes from "./navigation/index"
 const Stack = createStackNavigator()
 
 export default function App() {
-  const{authState,onLogut,isLoggedIn} =useAuth();
-  console.log('auth state-->',authState,isLoggedIn)
+  // const{authState,onLogut,isLoggedIn} =useAuth();
+  // console.log('auth state-->',authState,isLoggedIn)
 
   return (
   <Routes />

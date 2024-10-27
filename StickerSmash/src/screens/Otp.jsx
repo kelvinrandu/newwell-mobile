@@ -33,7 +33,8 @@ import { useToast } from "react-native-toast-notifications";
   }
   const onVerifyOtp = async () => { 
     const results = await verifyOtp(email,codes)
-    console.log(' OTP results',results)
+    const _res = await results
+    console.log(' OTP results',_res)
     if(results?.error){
         toast.show("Otp verification failed", {
           type: "danger",

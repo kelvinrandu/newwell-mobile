@@ -80,24 +80,28 @@ export const AuthProvider = ({ children }) => {
             const result = await axios.post(`${API_URL}/api/verify-otp`, { otp, email }).then(async response => {
             const res= await response?.data
                 if (res?.jwt) {
-
+                    console.log('inside verify')
+                   
 
                     setIsLoggedIn(true)
                     setAuthState({
-                        token: response.data.jwt,
+                        token: res?.jwt,
                         email:email,
                         authenticated: true
                     });
                     console.log('auth', authState)
-                    axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.jwt}`;
-                    await SecureStore.setItemAsync(TOKEN_KEY, response.data.jwt)
+                    axios.defaults.headers.common['Authorization'] = `Bearer ${res?.jwt}`;
+                    await SecureStore.setItemAsync(TOKEN_KEY, res?.jwt)
+                    console.log('between')
                     await SecureStore.setItemAsync(EMAIL_KEY, email)
+                    console.log('fin', authState)
 
-                    return await res?.jwt;
+                    return  res;
 
                 }else{
                     return { error: true }
                 }
+               
               
             }
 

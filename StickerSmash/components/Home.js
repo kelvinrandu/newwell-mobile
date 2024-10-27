@@ -40,7 +40,7 @@ const Home =  () => {
         // console.log('auth',authState?.email)
 
     fetchPersonalInfo(authState?.email)
-    console.log('auth->',user?.name,user?.user?.Membership, typeof(user?.user?.Membership))
+    // console.log('auth->',user?.name,user?.user?.Membership, typeof(user?.user?.Membership))
     return (
         <>
             <ScrollView>

@@ -49,43 +49,9 @@ export default function Login () {
       })
 
     }
-    // axios.post('https://nfa.newwell.app/api/auth/jwt-signin', {
-    //   email: email.value,
-    //   password: password.value
-    // })
-    // .then(function (response) {
-    //   console.log('response',response.data);
-    //   console.log(response?.data['jwt'])
-    //   // response?.data['jwt']? console.log('login successfull'):console.log('wrong credentials')
 
-    //   if(response?.data['jwt']){
-    //     // toast.show("Login succesful", {
-    //     //   type: "success",
-    //     //   placement: "top",
-    //     //   duration: 4000,
-    //     //   offset: 30,
-    //     //   animationType: "slide-in",
-    //     // });
-    // //     navigation.reset({
-    // //   index: 0,
-    // //   routes: [{ name: 'Dashboard' }],
-    // // })
 
-    //   }
-    //   else{
-    //     // toast.show("Login unsuccesful", {
-    //     //   type: "danger",
-    //     //   placement: "top",
-    //     //   duration: 4000,
-    //     //   offset: 30,
-    //     //   animationType: "slide-in",
-    //     // });
-
-    //   }
-    // })
-    // .catch(function (error) {
-    //   console.log('eror',error);
-    // });
+    setIsloading(false)
     
 
   }
@@ -136,7 +102,7 @@ export default function Login () {
       />
       <Text  textAlign='left' style={{color: colors.text,paddingBottom:20}}>Forgot Password</Text>
 
-        <Button loading={isLoading} buttonColor='#F47133' style={{width: '100%', marginLeft: 0,borderRadius:10}} mode="contained"
+        <Button loading={isLoading} disabled={isLoading} buttonColor='#F47133' style={{width: '100%', marginLeft: 0,borderRadius:10}} mode="contained"
         //  onPress={() =>   navigation.navigate('OtpPage')}
         onPress={login}
          >

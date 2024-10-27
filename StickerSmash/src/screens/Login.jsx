@@ -1,12 +1,6 @@
 /* eslint-disable react/react-in-jsx-scope */
 import {useState} from 'react';
 import {useTheme} from '@react-navigation/native';
-import { router } from 'expo-router';
-
-import {
-  NavigationContainer,
-  useNavigationContainerRef,
-} from '@react-navigation/native';
 import { useNavigation } from '@react-navigation/native';
 import {
   // Button,
@@ -28,6 +22,7 @@ export default function Login () {
   const{authState,onLogut,onLogin } =useAuth();
 
   const login = async () => { 
+    setIsloading(true)
     const results = await onLogin( email.value,password.value)
     console.log('results',results)
     if(results?.error){
@@ -47,6 +42,7 @@ export default function Login () {
         offset: 30,
         animationType: "slide-in",
       });
+      setIsloading(false)
       // const results = await onLogin( email.value,password.value)
       navigation.navigate('OtpPage',{
         email:email.value,
@@ -140,7 +136,7 @@ export default function Login () {
       />
       <Text  textAlign='left' style={{color: colors.text,paddingBottom:20}}>Forgot Password</Text>
 
-        <Button buttonColor='#F47133' style={{width: '100%', marginLeft: 0,borderRadius:10}} mode="contained"
+        <Button loading={isLoading} buttonColor='#F47133' style={{width: '100%', marginLeft: 0,borderRadius:10}} mode="contained"
         //  onPress={() =>   navigation.navigate('OtpPage')}
         onPress={login}
          >

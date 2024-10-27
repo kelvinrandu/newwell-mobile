@@ -51,7 +51,7 @@ const Home =  () => {
                         {/* <Card.Divider /> */}
                         <Text style={styles.fonts}>Hope you are good,</Text>
                         <View style={styles.display}>
-                            <Text style={styles.fonts}>Account : Basic</Text>
+                            <Text style={styles.fonts}>Account : {user?.user?.Membership[0].type}</Text>
                             <Text style={styles.fonts}>Upgrade</Text>
                         </View>
                         <Text style={styles.fonts}>Your music business in one place and under your control.</Text>

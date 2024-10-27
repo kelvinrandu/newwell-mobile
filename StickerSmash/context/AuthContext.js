@@ -19,6 +19,7 @@ export const AuthProvider = ({ children }) => {
         authenticated: null
     })
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [user, setUser] = useState(false);
     const isLoggedInRef = useRef(false);
     isLoggedInRef.current = isLoggedIn
 
@@ -26,7 +27,7 @@ export const AuthProvider = ({ children }) => {
         const loadToken = async () => {
             const token = await SecureStore.getItemAsync(TOKEN_KEY)
             const _email = await SecureStore.getItemAsync(EMAIL_KEY)
-            console.log('TOKEN==>', token)
+            // console.log('TOKEN==>', token)
             if (token && _email) {
                 axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
                 setIsLoggedIn(true)
@@ -107,31 +108,25 @@ export const AuthProvider = ({ children }) => {
             return { error: true, msg: (e).response.data.msg }
         }
     }
-    const fetchPersonalInfo = async (email, code) => {
+    const fetchPersonalInfo = async (email) => {
         try {
-            console.log('otp', email, code)
-            const otp = parseInt(code)
-            const result = await axios.post(`${API_URL}/api/api/get-personal-info`, { email }).then(async response => {
-                console.log('response',response)
+            const token = await SecureStore.getItemAsync(TOKEN_KEY)
+            const config = {
+                headers: { Authorization: `Bearer ${token}` }
+            };
+            const result = await axios.post(`${API_URL}/api/get-personal-info`, { email },config).
+            then(response=>{
+                
+                console.log('res',response.data)
+                if( response?.data?.artist){
+                    // console.log('artist',response?.data?.artist)
+                    setUser(response?.data?.artist)
+                }
+            
+            })
+            return  result
 
-                // if (response.data.jwt) {
-
-
-                //     setIsLoggedIn(true)
-                //     setAuthState({
-                //         token: response.data.jwt,
-                //         authenticated: true
-                //     });
-                //     console.log('auth', authState)
-                //     axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.jwt}`;
-                //     await SecureStore.setItemAsync(TOKEN_KEY, response.data.jwt)
-                //     return response;
-
-                // }
-                // return { error: true }
-            }
-
-            )
+            
 
 
 
@@ -156,6 +151,7 @@ export const AuthProvider = ({ children }) => {
         verifyOtp,
         fetchPersonalInfo,
         onLogut: logout,
+        user,
         isLoggedIn,
         authState,
         isLoggedInRef,

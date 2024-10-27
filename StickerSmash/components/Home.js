@@ -35,16 +35,19 @@ const users = [
 
 
 
-const Home = () => {
-    const{authState,onLogut,onLogin,fetchPersonalInfo } =useAuth();
-    console.log('auth',authState)
+const Home =  () => {
+    const{authState,onLogut,onLogin,fetchPersonalInfo ,user} =useAuth();
+        // console.log('auth',authState?.email)
+
+    fetchPersonalInfo(authState?.email)
+    console.log('auth->',user?.name,user?.user?.Membership, typeof(user?.user?.Membership))
     return (
         <>
             <ScrollView>
                 <View style={styles.container}>
                     <Text style={styles.fonts2} h4>  Welcome back !</Text>
                     <Card containerStyle={{ marginTop: 17, padding: 20, borderRadius: 10 }}>
-                        <Text style={styles.fonts} h3>Ms Anima,</Text>
+                        <Text style={styles.fonts} h3>{user?.name},</Text>
                         {/* <Card.Divider /> */}
                         <Text style={styles.fonts}>Hope you are good,</Text>
                         <View style={styles.display}>

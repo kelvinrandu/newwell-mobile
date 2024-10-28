@@ -3,7 +3,7 @@
 1. navigate to root 
     
 2. Install Packages
-     yarn
+    yarn
 
 
 ## Running the app

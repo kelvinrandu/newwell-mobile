@@ -2,8 +2,7 @@
 ## Installing the app
 1. navigate to root 
     
-2. Install Packages
-    yarn
+2. Install Packages using yarn or npm
 
 
 ## Running the app

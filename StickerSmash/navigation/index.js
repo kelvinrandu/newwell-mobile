@@ -22,6 +22,7 @@ export default function Routes() {
   const [loggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
+    //added interval as a replacement as i figure out secureStore listeners
     const interval = setInterval(() => {
       setCount(count + 1);
   }, 1000);
@@ -38,7 +39,7 @@ export default function Routes() {
     loadToken();
     return () => clearInterval(interval);
   }, [count]);
-  console.log('index',isLoggedInRef,isLoggedIn)
+
 
   if (isLoading) {
     return (

@@ -15,7 +15,7 @@ export const AuthProvider = ({ children }) => {
 
     const [authState, setAuthState] = useState({
         token: null,
-        email:null,
+        email: null,
         authenticated: null
     })
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -27,14 +27,14 @@ export const AuthProvider = ({ children }) => {
         const loadToken = async () => {
             const token = await SecureStore.getItemAsync(TOKEN_KEY)
             const _email = await SecureStore.getItemAsync(EMAIL_KEY)
-            // console.log('TOKEN==>', token)
+     
             if (token && _email) {
                 axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
                 setIsLoggedIn(true)
                 isLoggedInRef.current = true
                 setAuthState({
                     token: token,
-                    email:_email,
+                    email: _email,
                     authenticated: true
                 });
 
@@ -55,38 +55,38 @@ export const AuthProvider = ({ children }) => {
     }
 
     const login = async (email, password) => {
-        // try {
-            const result = await axios.post(`${API_URL}/api/auth/jwt-signin`, { email, password }).then(async response => {
-               const res= await response?.data
-                if (res?.jwt) {
-                    const result1 = await axios.post(`${API_URL}/api/send-otp`, { email })
+        try {
+        const result = await axios.post(`${API_URL}/api/auth/jwt-signin`, { email, password }).then(async response => {
+            const res = await response?.data
+            if (res?.jwt) {
+                const result1 = await axios.post(`${API_URL}/api/send-otp`, { email })
 
-                    return res;
+                return res;
 
-                }else{  return { error: true }}
-              
-            })
+            } else { return { error: true } }
+
+        })
 
 
 
-        // } catch (e) {
-        //     return { error: true, msg: (e).response.data.msg }
-        // }
+        } catch (e) {
+            return { error: true, msg: (e).response.data.msg }
+        }
     }
     const verifyOtp = async (email, code) => {
         try {
             console.log('otp', email, code)
             const otp = parseInt(code)
             const result = await axios.post(`${API_URL}/api/verify-otp`, { otp, email }).then(async response => {
-            const res= await response?.data
+                const res = await response?.data
                 if (res?.jwt) {
                     console.log('inside verify')
-                   
+
 
                     setIsLoggedIn(true)
                     setAuthState({
                         token: res?.jwt,
-                        email:email,
+                        email: email,
                         authenticated: true
                     });
                     console.log('auth', authState)
@@ -96,18 +96,16 @@ export const AuthProvider = ({ children }) => {
                     await SecureStore.setItemAsync(EMAIL_KEY, email)
                     console.log('fin', authState)
 
-                    return  res;
+                    return res;
 
-                }else{
+                } else {
                     return { error: true }
                 }
-               
-              
+
+
             }
 
             )
-
-
 
 
         } catch (e) {
@@ -121,19 +119,19 @@ export const AuthProvider = ({ children }) => {
             const config = {
                 headers: { Authorization: `Bearer ${token}` }
             };
-            const result = await axios.post(`${API_URL}/api/get-personal-info`, { email },config).
-            then(response=>{
-                
-                console.log('res',response.data)
-                if( response?.data?.artist){
-                    // console.log('artist',response?.data?.artist)
-                    setUser(response?.data?.artist)
-                }
-            
-            })
-            return  result
+            const result = await axios.post(`${API_URL}/api/get-personal-info`, { email }, config).
+                then(response => {
 
-            
+                    console.log('res', response.data)
+                    if (response?.data?.artist) {
+                        // console.log('artist',response?.data?.artist)
+                        setUser(response?.data?.artist)
+                    }
+
+                })
+            return result
+
+
 
 
 

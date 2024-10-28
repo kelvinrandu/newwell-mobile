@@ -15,6 +15,7 @@ export default function Otp({ route }) {
   const toast = useToast();
   console.log('email', email)
   const [codes, setCodes] = useState();
+  const [isLoading, setIsloading] = useState(false);
 
   const [errorMessages, setErrorMessages] = useState([]);
   const navigation = useNavigation();
@@ -70,7 +71,7 @@ export default function Otp({ route }) {
           }}
         />
       </View>
-      <Button buttonColor='#F47133' style={{ width: '80%', marginTop: 40, marginLeft: 0, borderRadius: 10 }} mode="contained"
+      <Button loading={isLoading} disabled={isLoading} buttonColor='#F47133' style={{ width: '80%', marginTop: 40, marginLeft: 0, borderRadius: 10 }} mode="contained"
         onVerifyOtp
         onPress={onVerifyOtp}
       //  onPress={() =>   navigation.navigate('Dashboard')}

@@ -55,7 +55,7 @@ export const AuthProvider = ({ children }) => {
     }
 
     const login = async (email, password) => {
-        try {
+        // try {
             const result = await axios.post(`${API_URL}/api/auth/jwt-signin`, { email, password }).then(async response => {
                const res= await response?.data
                 if (res?.jwt) {
@@ -69,9 +69,9 @@ export const AuthProvider = ({ children }) => {
 
 
 
-        } catch (e) {
-            return { error: true, msg: (e).response.data.msg }
-        }
+        // } catch (e) {
+        //     return { error: true, msg: (e).response.data.msg }
+        // }
     }
     const verifyOtp = async (email, code) => {
         try {

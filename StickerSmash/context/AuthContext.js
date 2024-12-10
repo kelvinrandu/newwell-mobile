@@ -53,6 +53,13 @@ export const AuthProvider = ({ children }) => {
             return { error: true, msg: (e).response.data.msg }
         }
     }
+    const add_profile = async (email, password) => {
+        try {
+            return await axios.post(`${API_URL}/api/add-auth-user`, { email, password })
+        } catch (e) {
+            return { error: true, msg: (e).response.data.msg }
+        }
+    }
 
     const login = async (email, password) => {
         try {
@@ -152,6 +159,7 @@ export const AuthProvider = ({ children }) => {
     }
     const value = {
         onRegister: register,
+        onProfileAdd:add_profile,
         onLogin: login,
         verifyOtp,
         fetchPersonalInfo,

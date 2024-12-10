@@ -59,7 +59,7 @@ export default function Login () {
 
   return (
     <View style={styles.container}>
-       <Text textAlign='left' style={{color: colors.text,fontSize:20,fontWeight:800, paddingBottom:180}}>Newwell for Artists</Text>
+       <Text textAlign='left' style={{color: colors.text,fontSize:20,fontWeight:800, marginBottom:110}}>Newwell for Artists</Text>
       <Text textAlign='left' style={{color: colors.text}}>Email Adress</Text>
       <TextInput
         style={{
@@ -100,7 +100,7 @@ export default function Login () {
         errorText={password.error}
      
       />
-      <Text  textAlign='left' style={{color: colors.text,paddingBottom:20}}>Forgot Password</Text>
+      <Text  textAlign='' style={{color: colors.text,paddingBottom:20}}>Forgot Password</Text>
 
         <Button loading={isLoading} disabled={isLoading} buttonColor='#F47133' style={{width: '100%', marginLeft: 0,borderRadius:10}} mode="contained"
         //  onPress={() =>   navigation.navigate('OtpPage')}
@@ -110,6 +110,15 @@ export default function Login () {
   </Button>
 
       <View style={styles.spacer} />
+      <Text  textAlign='left' style={{color: colors.text,paddingBottom:20}}>or</Text>
+      <Button textColor="black" style={{width: '100%',marginLeft: 0,borderRadius:10}} mode="text"
+         onPress={() =>   navigation.navigate('Signup')}
+  
+         >
+        Register
+  </Button>
+
+
     </View>
   );
 };

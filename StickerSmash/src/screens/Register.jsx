@@ -1,6 +1,6 @@
 /* eslint-disable react/react-in-jsx-scope */
-import {useState} from 'react';
-import {useTheme} from '@react-navigation/native';
+import { useState } from 'react';
+import { useTheme } from '@react-navigation/native';
 import { router } from 'expo-router';
 import {
   NavigationContainer,
@@ -9,53 +9,119 @@ import {
 import { useNavigation } from '@react-navigation/native';
 import {
   // Button,
-   StyleSheet, Text, TextInput,ToastAndroid, View} from 'react-native';
-   import { Button } from 'react-native-paper';
+  StyleSheet, Text, TextInput, ToastAndroid, View
+} from 'react-native';
+import { Button } from 'react-native-paper';
+import { useAuth } from "../../context/AuthContext";
+import { useToast } from "react-native-toast-notifications";
 
-// const URL_KEY = 'API2axhtoc6oUxm';
-// const TOKEN_KEY = 'SVVLMwejKKlqmgf9LV255fWOmEeLLEYM41O1Ma1rIZ6B';
 
-export default function Login () {
-  const [partipantName, setParticipantName] = useState('');
-  const [roomName, setRoomName] = useState('');
+export default function Login() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [cPassword, setCPassword] = useState('');
   const [isLoading, setIsloading] = useState(false);
   const navigation = useNavigation();
-  const {colors} = useTheme();
+  const toast = useToast();
+  const { onRegister, onLogin } = useAuth();
+  const { colors } = useTheme();
+
+  const register = async () => {
+    setIsloading(true)
+    const results = await onRegister(email, password)
+    console.log('results', results.data)
+    if (results.data !== "success") {
+      toast.show("Register unsuccesful", {
+        type: "danger",
+        placement: "top",
+        duration: 4000,
+        offset: 30,
+        animationType: "slide-in",
+      });
+
+    } else {
 
 
+
+      const results = await onLogin(email, password)
+      if (results?.error) {
+        toast.show("Register unsuccesful", {
+          type: "danger",
+          placement: "top",
+          duration: 4000,
+          offset: 30,
+          animationType: "slide-in",
+        });
+
+      } else {
+        toast.show("Register successful", {
+          type: "success",
+          placement: "top",
+          duration: 4000,
+          offset: 30,
+          animationType: "slide-in",
+        });
+      navigation.navigate('OtpPage', {
+        email: email,
+      })
+
+    }
+
+
+    setIsloading(false)
+  }
+
+  }
   return (
     <View style={styles.container}>
-       <Text textAlign='left' style={{color: colors.text,fontSize:20,fontWeight:800, paddingBottom:180}}>Newwell for Artists</Text>
-      <Text textAlign='left' style={{color: colors.text}}>Email Adress</Text>
+      <Text textAlign='left' style={{ color: colors.text, fontSize: 20, fontWeight: 800, paddingBottom: 100 }}>Create Account</Text>
+      <Text textAlign='left' style={{ color: colors.text }}>Email Adress</Text>
       <TextInput
         style={{
           color: colors.text,
+          textAlign: 'left',
           borderColor: colors.border,
-          borderRadius:10,
+          borderRadius: 10,
           ...styles.input,
         }}
-        onChangeText={setParticipantName}
+        onChangeText={setEmail}
         type='email'
-        value={partipantName}
+        value={email}
       />
 
-      <Text textAlign='left' style={{color: colors.text,alignItems:'flex-start',alignContent:'flex-start',textAlign:'left',justifyContent:'flex-start'}}>Password</Text>
+      <Text textAlign='left' style={{ color: colors.text, alignItems: 'flex-start', alignContent: 'flex-start', textAlign: 'left', justifyContent: 'flex-start' }}>Password</Text>
       <TextInput
-       autoCapitalize={'none'}
-       autoCorrect={false}
-       secureTextEntry={true}
-       textContentType={'password'}
+        autoCapitalize={'none'}
+        autoCorrect={false}
+        secureTextEntry={true}
+        textContentType={'password'}
         style={{
           color: colors.text,
-          borderRadius:10,
+          borderRadius: 10,
           borderColor: colors.border,
           ...styles.input,
         }}
-        
-        // onChangeText={setRoomName}
-        // value={roomName}
+
+        onChangeText={setPassword}
+        value={password}
       />
-      <Text  textAlign='left' style={{color: colors.text,paddingBottom:20}}>Forgot Password</Text>
+      <Text textAlign='left' style={{ color: colors.text, alignItems: 'flex-start', alignContent: 'flex-start', textAlign: 'left', justifyContent: 'flex-start' }}>Confirm Password</Text>
+      <TextInput
+        autoCapitalize={'none'}
+        autoCorrect={false}
+        secureTextEntry={true}
+        textContentType={'password'}
+        style={{
+          color: colors.text,
+          borderRadius: 10,
+          borderColor: colors.border,
+          ...styles.input,
+        }}
+
+        onChangeText={setCPassword}
+        value={cPassword}
+      />
+
       {/* {isLoading ? (
         <Button color={'red'} title="Connecting.." />
       ) : (
@@ -65,9 +131,12 @@ export default function Login () {
         }
           />
       )} */}
-        <Button buttonColor='#F47133' style={{width: '100%', marginLeft: 0,borderRadius:10}} mode="contained" onPress={() =>   navigation.navigate('OtpPage')}>
-        Sign In
-  </Button>
+      <Button loading={isLoading} disabled={isLoading} buttonColor='#F47133' style={{ width: '100%', marginLeft: 0, marginTop: 10, borderRadius: 10 }} mode="contained"
+        // onPress={() =>   navigation.navigate('OtpPage')}
+        onPress={register}
+      >
+        Register
+      </Button>
 
       <View style={styles.spacer} />
     </View>
@@ -78,10 +147,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    
+
     justifyContent: 'center',
     paddingHorizontal: 20,
-    paddingBottom:200
+    paddingBottom: 200
   },
   box: {
     width: 60,

@@ -28,7 +28,7 @@ export default function Routes() {
   }, 1000);
     const loadToken = async () => {
       const token = await SecureStore.getItemAsync(TOKEN_KEY);
-      console.log("TOKEN index ===>", token);
+
       if (token) {
         setIsLoggedIn(true);
         axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;

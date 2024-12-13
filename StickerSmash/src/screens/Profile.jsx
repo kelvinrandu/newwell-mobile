@@ -21,6 +21,7 @@ export default function Profile ({route}) {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [stageName, setStageName] = useState('');
+  const [phone, setPhone] = useState('');
   const [country, setCountry] = useState('');
   const [gender, setGender] = useState('');
   const [isLoading, setIsloading] = useState(false);
@@ -31,7 +32,7 @@ export default function Profile ({route}) {
   const{onProfileAdd } =useAuth();
   const register = async () => { 
     setIsloading(true)
-    // const results = await onProfileAdd( email,password)
+    const results = await onProfileAdd(email,firstName,lastName,country,gender,phone)
     console.log('results',results.data)
     if(results.data !== "success"){
         toast.show("Register unsuccesful", {

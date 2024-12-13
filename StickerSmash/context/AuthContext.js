@@ -55,7 +55,7 @@ export const AuthProvider = ({ children }) => {
     }
     const add_profile = async (email, password) => {
         try {
-            return await axios.post(`${API_URL}/api/add-auth-user`, { email, password })
+            return await axios.post(`${API_URL}/api/rest-register-artist`, { email,firstName,lastName,country,gender,phone })
         } catch (e) {
             return { error: true, msg: (e).response.data.msg }
         }
